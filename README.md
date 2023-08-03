@@ -1,2 +1,2 @@
 # AlexanderHW
-Repository for home work
+Repository for home works
