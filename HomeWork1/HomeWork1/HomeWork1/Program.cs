@@ -1,6 +1,5 @@
 ﻿using ArrayHelper;
 using RectangleHelper;
-using static ArrayHelper.BubbleSort;
 
 namespace HomeWork1
 {
@@ -27,7 +26,7 @@ namespace HomeWork1
                 switch (choice)
                 {
                     case 1:
-                        Bubble();  //код для одномерного массива
+                        BubbleSort();  //код для одномерного массива
                         break;
                     case 2:
                         SumOfPositiveTerms(); //код для двумерного массива
@@ -46,17 +45,26 @@ namespace HomeWork1
             } while (!CorrectInput);
         }
 
-        static void Bubble()
+        static void BubbleSort()
         {
+            bool InvalidNumber;
+            int Size;
+            do {
+                Console.Write("\nВведите размер массива: ");
+                InvalidNumber = int.TryParse(Console.ReadLine(), out Size);
+                if (!InvalidNumber)
+                {
+                    Console.WriteLine("Некорректный значение. Пожалуйста, введите целое число.");
+                }
+            }while(!InvalidNumber);
 
-            Console.Write("\nВведите размер массива: ");
-            int Size = int.Parse(Console.ReadLine());
+
 
             int[] array = new int[Size];
 
             for (int i = 0; i < Size; i++)
             {
-                bool InvalidNumber;
+                
                 do
                 {
                     Console.Write($"Введите элемент {i + 1} из {Size}: ");
@@ -91,12 +99,12 @@ namespace HomeWork1
                 switch (ChoiceForBubble)
                 {
                     case 1:
-                        ASCSort(array);
+                        ArraySort.BubbleSort(array,SortType.ASC);
                         Console.WriteLine("\nСортировка по возрастанию:");
                         Console.WriteLine(string.Join(", ", array));
                         break;
                     case 2:
-                        DescSort(array);
+                        ArraySort.BubbleSort(array, SortType.DESC);
                         Console.WriteLine("\nСортировка по убыванию:");
                         Console.WriteLine(string.Join(", ", array));
                         break;
@@ -166,7 +174,7 @@ namespace HomeWork1
             }
 
 
-            int sum = ArrayOperations.SumOfPositiveElements(TwoDimensionalArray);
+            int sum = SumOfPositiveElements.GetSumOPositiveElements(TwoDimensionalArray);
             Console.WriteLine($"Сумма положительных элементов: {sum}");
 
         }
@@ -180,13 +188,19 @@ namespace HomeWork1
             {
                 Console.Write("Введите ширину прямоугольника: ");
                 InvalidNumber = double.TryParse(Console.ReadLine(), out width);
-
-                Console.Write("Введите высоту прямоугольника: ");
-                InvalidNumber = double.TryParse(Console.ReadLine(), out height);
                 if (!InvalidNumber)
                 {
                     Console.WriteLine("Некорректный значение. Пожалуйста, введите целое число.");
                 }
+
+                Console.Write("Введите высоту прямоугольника: ");
+                InvalidNumber = double.TryParse(Console.ReadLine(), out height);
+                
+                if (!InvalidNumber)
+                {
+                    Console.WriteLine("Некорректный значение. Пожалуйста, введите целое число.");
+                }
+
             }while (!InvalidNumber);
 
              Rectangle rectangle = new Rectangle { Width = width, Height = height };

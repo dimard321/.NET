@@ -2,9 +2,25 @@
 
 namespace ArrayHelper
 {
-    public class BubbleSort
+    public class ArraySort
     {
-        public static bool ASCSort(int[] array)
+        public static bool BubbleSort(int[] array, SortType sortType)
+        {
+            var result = false;
+            switch(sortType)
+            {
+                case SortType.ASC:
+                    result = BubbleSortAsc(array);
+                    break;
+                case SortType.DESC:
+                    result = BubbleSortDesc(array);
+                    break;
+                default:
+                    return result;
+            }
+            return result;
+        }
+        public static bool BubbleSortAsc(int[] array)
         {
             if (array == null)
             {
@@ -27,7 +43,7 @@ namespace ArrayHelper
             return true;
         }
 
-        public static bool DescSort(int[] array)
+        public static bool BubbleSortDesc(int[] array)
         {
             if (array == null)
             {
@@ -48,34 +64,6 @@ namespace ArrayHelper
             }
             return true;
         }
-
-        public class ArrayOperations
-        {
-
-            public static int SumOfPositiveElements(int[,] array)
-            {
-                if (array == null)
-                {
-                    return -1;
-                }
-
-                int Row = array.GetLength(0);
-                int Column = array.GetLength(1);
-                int Sum = 0;
-
-                for (int i = 0; i < Row; i++)  // Проходим по строкам
-                {
-                    for (int j = 0; j < Column; j++)  // Проходим по столбцам
-                    {
-                        if (array[i, j] > 0)  // Если текущий элемент положительный
-                        {
-                            Sum += array[i, j];  // Добавляем элемент к сумме
-                        }
-                    }
-                }
-
-                return Sum;  // Возвращаем сумму 
-            }
-        }
     }
+    
 }
