@@ -1,5 +1,10 @@
-﻿namespace ArrayHelper
+﻿using System;
+
+namespace ArrayHelper
 {
+    /// <summary>
+    /// Предоставляет методы для сортировки массива методом пузырька.
+    /// </summary>
     public class ArraySort
     {
         /// <summary>
@@ -25,7 +30,6 @@
         /// <param name="array">Массив для сортировки.</param>
         public static void BubbleSortAsc(double[] array)
         {
-
             var n = array.Length;
 
             for (int i = 0; i < n - 1; i++)

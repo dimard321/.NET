@@ -1,5 +1,8 @@
 ﻿namespace ArrayHelper
 {
+    /// <summary>
+    /// Представляет метод для подсчета суммы положительных членов двумерного массива
+    /// </summary>
     public class SumOfPositiveElements
     {
         /// <summary>
@@ -28,7 +31,6 @@
                     }
                 }
             }
-
             return sum;  // Возвращаем сумму 
         }
     }

@@ -3,6 +3,9 @@ using RectangleHelper;
 
 namespace HomeWork1
 {
+    /// <summary>
+    /// Основной класс программы в котором продемонстрирована реализация библиотек классов и интерфейса
+    /// </summary>
     class Program
     {
         /// <summary>
@@ -27,16 +30,16 @@ namespace HomeWork1
 
                     switch (mainMenuChoice)
                     {
-                        case MainMenuChoice.bubbleSort:
+                        case MainMenuChoice.BubbleSort:
                             BubbleSort();
                             break;
-                        case MainMenuChoice.sumOfPositiveTerms:
+                        case MainMenuChoice.SumOfPositiveTerms:
                             SumOfPositiveTerms(); //код для двумерного массива
                             break;
-                        case MainMenuChoice.rectangle:
+                        case MainMenuChoice.Rectangle:
                             Rectangle();   //код для прямоугольника
                             break;
-                        case MainMenuChoice.exit:
+                        case MainMenuChoice.Exit:
                             сorrectInput = true;  //флаг для выхода 
                             break;
                         default:
@@ -96,23 +99,23 @@ namespace HomeWork1
                 Console.WriteLine("2. Сортировка по убыванию");
                 Console.WriteLine("3. Вернуться к предыдущим действиям");
 
-                if (int.TryParse(Console.ReadLine(), out int choice) && Enum.IsDefined(typeof(ChoiceForBubble), choice))
+                if (int.TryParse(Console.ReadLine(), out int choice) && Enum.IsDefined(typeof(BubbleSortType), choice))
                 {
-                    ChoiceForBubble choiceForBubble = (ChoiceForBubble)choice;
+                    BubbleSortType choiceForBubble = (BubbleSortType)choice;
 
                     switch (choiceForBubble)
                     {
-                        case ChoiceForBubble.ascending:
+                        case BubbleSortType.ASC:
                             ArraySort.BubbleSort(array, SortType.ASC);
                             Console.WriteLine("\nСортировка по возрастанию:");
                             Console.WriteLine(string.Join(" ", array));
                             break;
-                        case ChoiceForBubble.descending:
+                        case BubbleSortType.DESC:
                             ArraySort.BubbleSort(array, SortType.DESC);
                             Console.WriteLine("\nСортировка по убыванию:");
                             Console.WriteLine(string.Join(" ", array));
                             break;
-                        case ChoiceForBubble.back:
+                        case BubbleSortType.Back:
                             stayUntil = true;
                             break;
                         default:
@@ -170,7 +173,6 @@ namespace HomeWork1
                 }
             }
 
-
             Console.WriteLine("Введенный двумерный массив:");
             for (int i = 0; i < rows; i++)
             {
@@ -181,11 +183,9 @@ namespace HomeWork1
                 Console.WriteLine();
             }
 
-
             var sum = SumOfPositiveElements
                 .GetSumOfPositiveElements(twoDimensionalArray);
             Console.WriteLine($"Сумма положительных элементов: {sum}");
-
         }
 
         /// <summary>
@@ -213,7 +213,6 @@ namespace HomeWork1
                 {
                     Console.WriteLine("Некорректный значение. Пожалуйста, введите положительное число.");
                 }
-
             } while (invalidNumber);
 
             Rectangle rectangle = new Rectangle { Width = width, Height = height };
@@ -221,26 +220,25 @@ namespace HomeWork1
             var stayUntil = false; //не покидать цикл
             do
             {
-
                 Console.WriteLine("\nВыберете действие:");
                 Console.WriteLine("1. Высчитать периметр прямоугольника");
                 Console.WriteLine("2. Высчитать площадь прямоугольника");
                 Console.WriteLine("3. Вернуться к предыдущим действиям");
 
-                if (int.TryParse(Console.ReadLine(), out int choice) && Enum.IsDefined(typeof(CaseForRectangle), choice))
+                if (int.TryParse(Console.ReadLine(), out int choice) && Enum.IsDefined(typeof(RectangleOperations), choice))
                 {
-                    CaseForRectangle caseForRectangle = (CaseForRectangle)choice;
+                    RectangleOperations caseForRectangle = (RectangleOperations)choice;
                     switch (caseForRectangle)
                     {
-                        case CaseForRectangle.perimetr:
+                        case RectangleOperations.GetPerimetr:
                             double Perimeter = rectangle.Perimeter();
                             Console.WriteLine($"Периметр прямоугольника: {Perimeter}");
                             break;
-                        case CaseForRectangle.area:
+                        case RectangleOperations.GetArea:
                             double Area = rectangle.Area();
                             Console.WriteLine($"Площадь прямоугольника: {Area}");
                             break;
-                        case CaseForRectangle.back:
+                        case RectangleOperations.back:
                             stayUntil = true;  //флаг для выхода 
                             break;
                         default:

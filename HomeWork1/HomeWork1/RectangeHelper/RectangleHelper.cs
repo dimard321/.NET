@@ -1,5 +1,8 @@
 ﻿namespace RectangleHelper
 {
+    /// <summary>
+    /// Представляет методы для вычисления периметра и площади прямоугольника
+    /// </summary>
     public class Rectangle
     {
         /// <summary>

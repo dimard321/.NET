@@ -18,24 +18,24 @@ namespace ArrayHelper
     public enum MainMenuChoice
     {
         [Description("Сортировка пузырьком")]
-        bubbleSort = 1,
+        BubbleSort = 1,
         [Description("Сумма положительных членов двумерного масиива")]
-        sumOfPositiveTerms,
+        SumOfPositiveTerms,
         [Description("Работа с прямоугльником")]
-        rectangle,
+        Rectangle,
         [Description("Выход")]
-        exit
+        Exit
     }
     /// <summary>
     /// Представляет действия для выбора сортировки пузырьком.
     /// </summary>
-    public enum ChoiceForBubble
+    public enum BubbleSortType
     {
         [Description("Выбор действия сортировки по возрастанию")]
-        ascending = 1,
+        ASC = 1,
         [Description("Выбор действия сортировки по убыванию")]
-        descending,
+        DESC,
         [Description("Вернуться назад")]
-        back
+        Back
     }
 }

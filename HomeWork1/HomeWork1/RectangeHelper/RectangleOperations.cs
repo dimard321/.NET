@@ -5,12 +5,12 @@ namespace RectangleHelper
     /// <summary>
     /// Представляет действия, связанные с прямоугольником.
     /// </summary>
-    public enum CaseForRectangle
+    public enum RectangleOperations
     {
         [Description("Подсчет периметра")]
-        perimetr = 1,
+        GetPerimetr = 1,
         [Description("Подсчет площади")]
-        area,
+        GetArea,
         [Description("Вернуться назад")]
         back
     }
