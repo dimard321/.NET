@@ -1,69 +1,64 @@
-﻿using System;
-
-namespace ArrayHelper
+﻿namespace ArrayHelper
 {
     public class ArraySort
     {
-        public static bool BubbleSort(int[] array, SortType sortType)
+        /// <summary>
+        /// Сортирует массив пузырьком в указанном порядке.
+        /// </summary>
+        /// <param name="array">Массив для сортировки.</param>
+        /// <param name="sortType">Порядок сортировки (по возрастанию или убыванию).</param>
+        public static void BubbleSort(double[] array, SortType sortType)
         {
-            var result = false;
-            switch(sortType)
+            switch (sortType)
             {
                 case SortType.ASC:
-                    result = BubbleSortAsc(array);
+                    BubbleSortAsc(array);
                     break;
                 case SortType.DESC:
-                    result = BubbleSortDesc(array);
+                    BubbleSortDesc(array);
                     break;
-                default:
-                    return result;
             }
-            return result;
         }
-        public static bool BubbleSortAsc(int[] array)
+        /// <summary>
+        /// Сортирует массив пузырьком по возрастанию.
+        /// </summary>
+        /// <param name="array">Массив для сортировки.</param>
+        public static void BubbleSortAsc(double[] array)
         {
-            if (array == null)
-            {
-                return false;
-            }
 
-            int n = array.Length;
-            for (int i = 0; i < n - 1; i++)  // Проходим по всем элементам 
+            var n = array.Length;
+
+            for (int i = 0; i < n - 1; i++)
             {
-                for (int j = 0; j < n - i - 1; j++)  //цикл для сравнения и перемещения элементов
+                for (int j = 0; j < n - i - 1; j++)
                 {
-                    if (array[j] > array[j + 1])  // Если текущий элемент больше следующего
+                    if (array[j] > array[j + 1])
                     {
-                        int per = array[j];      // Создаем временную переменную
-                        array[j] = array[j + 1];  // Замена текущего элемента на следующий
-                        array[j + 1] = per;      // Замена следующего элемента на временную переменную
+                        (array[j + 1], array[j]) = (array[j], array[j + 1]);
                     }
                 }
             }
-            return true;
         }
-
-        public static bool BubbleSortDesc(int[] array)
+        /// <summary>
+        /// Сортирует массив пузырьком по убыванию.
+        /// </summary>
+        /// <param name="array">Массив для сортировки.</param>
+        public static void BubbleSortDesc(double[] array)
         {
-            if (array == null)
-            {
-                return false;
-            }
-            int n = array.Length;
+
+            var n = array.Length;
+
             for (int i = 0; i < n - 1; i++)
             {
                 for (int j = 0; j < n - i - 1; j++)
                 {
                     if (array[j] < array[j + 1])
                     {
-                        int per = array[j];
-                        array[j] = array[j + 1];
-                        array[j + 1] = per;
+                        (array[j + 1], array[j]) = (array[j], array[j + 1]);
                     }
                 }
             }
-            return true;
         }
     }
-    
 }
+   

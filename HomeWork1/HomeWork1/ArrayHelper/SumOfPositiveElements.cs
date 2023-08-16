@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ArrayHelper
+﻿namespace ArrayHelper
 {
     public class SumOfPositiveElements
     {
-        public static int GetSumOPositiveElements(int[,] array)
+        /// <summary>
+        /// Метод для подсчета суммы положительных членов двумерного массива
+        /// </summary>
+        /// <param name="array">Двумерный массив для подсчета</param>
+        /// <returns>Сумма положительных элементов</returns>
+        public static double GetSumOfPositiveElements(double[,] array)
         {
-            if (array == null)
+            if (array is null)
             {
                 return -1;
             }
 
-            int Row = array.GetLength(0);
-            int Column = array.GetLength(1);
-            int Sum = 0;
+            var Row = array.GetLength(0);
+            var Column = array.GetLength(1);
+            var Sum = 0.0;
 
             for (int i = 0; i < Row; i++)  // Проходим по строкам
             {
