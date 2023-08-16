@@ -11,7 +11,7 @@ namespace HomeWork1
         /// <param name="args">Аргументы командной строки.</param>
         public static void Main(string[] args)
         {
-            var CorrectInput = false;
+            var сorrectInput = false;
             do
             {
                 Console.WriteLine("\nВыбор действия");
@@ -21,28 +21,30 @@ namespace HomeWork1
                 Console.WriteLine("4. Выход");
                 Console.Write("Введите номер действия: ");
 
-                var choice = int.Parse(Console.ReadLine());
-
-                switch (choice)
+                if (int.TryParse(Console.ReadLine(), out int choice) && Enum.IsDefined(typeof(MainMenuChoice), choice))
                 {
-                    case 1:
-                        BubbleSort();  //код для одномерного массива
-                        break;
-                    case 2:
-                        SumOfPositiveTerms(); //код для двумерного массива
-                        break;
-                    case 3:
-                        Rectangle();   //код для прямоугольника
-                        break;
-                    case 4:
-                        CorrectInput = true;  //флаг для выхода 
-                        break;
-                    default:
-                        Console.WriteLine("\n\nНекорректный выбор. Пожалуйста, выберите одну из доступных операций.");
-                        break;
-                }
+                    MainMenuChoice mainMenuChoice = (MainMenuChoice)choice;
 
-            } while (!CorrectInput);
+                    switch (mainMenuChoice)
+                    {
+                        case MainMenuChoice.bubbleSort:
+                            BubbleSort();
+                            break;
+                        case MainMenuChoice.sumOfPositiveTerms:
+                            SumOfPositiveTerms(); //код для двумерного массива
+                            break;
+                        case MainMenuChoice.rectangle:
+                            Rectangle();   //код для прямоугольника
+                            break;
+                        case MainMenuChoice.exit:
+                            сorrectInput = true;  //флаг для выхода 
+                            break;
+                        default:
+                            Console.WriteLine("\n\nНекорректный выбор. Пожалуйста, выберите одну из доступных операций.");
+                            break;
+                    }
+                }
+            } while (!сorrectInput);
         }
 
         /// <summary>
@@ -50,43 +52,43 @@ namespace HomeWork1
         /// </summary>
         static void BubbleSort()
         {
-            var InvalidNumber = true;
-            int Size;
+            var invalidNumber = true;
+            int size;
 
             do
             {
                 Console.Write("\nВведите размер массива: ");
-                InvalidNumber = !int.TryParse(Console.ReadLine(), out Size) || Size <= 0;
-                if (InvalidNumber)
+                invalidNumber = !int.TryParse(Console.ReadLine(), out size) || size <= 0;
+                if (invalidNumber)
                 {
                     Console.WriteLine("Некорректный размер. Пожалуйста, введите целое число.");
                 }
-            } while (InvalidNumber);
+            } while (invalidNumber);
 
-            var array = new double[Size];
+            var array = new double[size];
 
-            for (int i = 0; i < Size; i++)
+            for (int i = 0; i < size; i++)
             {
                 do
                 {
-                    Console.Write($"Введите элемент {i + 1} из {Size}: ");
-                    InvalidNumber = !double.TryParse(Console.ReadLine(), out array[i]);
+                    Console.Write($"Введите элемент {i + 1} из {size}: ");
+                    invalidNumber = !double.TryParse(Console.ReadLine(), out array[i]);
 
-                    if (InvalidNumber)
+                    if (invalidNumber)
                     {
                         Console.WriteLine("Некорректное значение. Пожалуйста, введите число.");
                     }
 
-                } while (InvalidNumber);
+                } while (invalidNumber);
             }
 
             Console.WriteLine("\nВведенный массив:");
-            for (int i = 0; i < Size; i++)
+            for (int i = 0; i < size; i++)
             {
                 Console.Write(array[i] + " ");
             }
 
-            var StayUntil = false;
+            var stayUntil = false;
             do
             {
                 Console.WriteLine("\n\nВыберете действие:");
@@ -94,29 +96,32 @@ namespace HomeWork1
                 Console.WriteLine("2. Сортировка по убыванию");
                 Console.WriteLine("3. Вернуться к предыдущим действиям");
 
-                var ChoiceForBubble = int.Parse(Console.ReadLine());
-
-                switch (ChoiceForBubble)
+                if (int.TryParse(Console.ReadLine(), out int choice) && Enum.IsDefined(typeof(ChoiceForBubble), choice))
                 {
-                    case 1:
-                        ArraySort.BubbleSort(array, SortType.ASC);
-                        Console.WriteLine("\nСортировка по возрастанию:");
-                        Console.WriteLine(string.Join(", ", array));
-                        break;
-                    case 2:
-                        ArraySort.BubbleSort(array, SortType.DESC);
-                        Console.WriteLine("\nСортировка по убыванию:");
-                        Console.WriteLine(string.Join(", ", array));
-                        break;
-                    case 3:
-                        StayUntil = true;  //флаг для выхода 
-                        break;
-                    default:
-                        Console.WriteLine("\n\nНекорректный выбор. Пожалуйста, выберите одну из доступных операций.");
-                        break;
-                }
+                    ChoiceForBubble choiceForBubble = (ChoiceForBubble)choice;
 
-            } while (!StayUntil);
+                    switch (choiceForBubble)
+                    {
+                        case ChoiceForBubble.ascending:
+                            ArraySort.BubbleSort(array, SortType.ASC);
+                            Console.WriteLine("\nСортировка по возрастанию:");
+                            Console.WriteLine(string.Join(" ", array));
+                            break;
+                        case ChoiceForBubble.descending:
+                            ArraySort.BubbleSort(array, SortType.DESC);
+                            Console.WriteLine("\nСортировка по убыванию:");
+                            Console.WriteLine(string.Join(" ", array));
+                            break;
+                        case ChoiceForBubble.back:
+                            stayUntil = true;
+                            break;
+                        default:
+                            Console.WriteLine("\n\nНекорректный выбор. Пожалуйста, выберите одну из доступных операций.");
+                            break;
+                    }
+
+                }
+            } while (!stayUntil);
         }
 
         /// <summary>
@@ -124,30 +129,30 @@ namespace HomeWork1
         /// </summary>
         static void SumOfPositiveTerms()
         {
-            var InvalidNumber = true;
+            var invalidNumber = true;
             int rows, cols;
 
             do
             {
                 Console.Write("Введите количество строк: ");
-                InvalidNumber = !int.TryParse(Console.ReadLine(), out rows) || rows <= 0;
-                if (InvalidNumber)
+                invalidNumber = !int.TryParse(Console.ReadLine(), out rows) || rows <= 0;
+                if (invalidNumber)
                 {
                     Console.WriteLine("Некорректный размер. Пожалуйста, введите целое число.");
                 }
-            } while (InvalidNumber);
+            } while (invalidNumber);
 
             do
             {
                 Console.Write("Введите количество столбцов: ");
-                InvalidNumber = !int.TryParse(Console.ReadLine(), out cols) || cols <= 0;
-                if (InvalidNumber)
+                invalidNumber = !int.TryParse(Console.ReadLine(), out cols) || cols <= 0;
+                if (invalidNumber)
                 {
                     Console.WriteLine("Некорректный размер. Пожалуйста, введите целое число.");
                 }
-            } while (InvalidNumber);
+            } while (invalidNumber);
 
-            double[,] TwoDimensionalArray = new double[rows, cols];
+            double[,] twoDimensionalArray = new double[rows, cols];
 
             for (int i = 0; i < rows; i++)
             {
@@ -156,12 +161,12 @@ namespace HomeWork1
                     do
                     {
                         Console.Write($"Введите элемент [{i + 1}, {j + 1}]: ");
-                        InvalidNumber = double.TryParse(Console.ReadLine(), out TwoDimensionalArray[i, j]);
-                        if (!InvalidNumber)
+                        invalidNumber = double.TryParse(Console.ReadLine(), out twoDimensionalArray[i, j]);
+                        if (!invalidNumber)
                         {
                             Console.WriteLine("Некорректный значение. Пожалуйста, введите целое число.");
                         }
-                    } while (!InvalidNumber);
+                    } while (!invalidNumber);
                 }
             }
 
@@ -171,13 +176,14 @@ namespace HomeWork1
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    Console.Write(TwoDimensionalArray[i, j] + " ");
+                    Console.Write(twoDimensionalArray[i, j] + " ");
                 }
                 Console.WriteLine();
             }
 
 
-            var sum = SumOfPositiveElements.GetSumOfPositiveElements(TwoDimensionalArray);
+            var sum = SumOfPositiveElements
+                .GetSumOfPositiveElements(twoDimensionalArray);
             Console.WriteLine($"Сумма положительных элементов: {sum}");
 
         }
@@ -188,31 +194,31 @@ namespace HomeWork1
         static void Rectangle()
         {
             double width, height;
-            var InvalidNumber = true;
+            var invalidNumber = true;
             do
             {
                 Console.Write("Введите ширину прямоугольника: ");
-                InvalidNumber = !double.TryParse(Console.ReadLine(), out width) || width <= 0;
-                if (InvalidNumber)
+                invalidNumber = !double.TryParse(Console.ReadLine(), out width) || width <= 0;
+                if (invalidNumber)
                 {
                     Console.WriteLine("Некорректный значение. Пожалуйста, введите положительное число.");
                 }
-            } while (InvalidNumber);
+            } while (invalidNumber);
             do
             {
                 Console.Write("Введите высоту прямоугольника: ");
-                InvalidNumber = !double.TryParse(Console.ReadLine(), out height) || height <= 0;
+                invalidNumber = !double.TryParse(Console.ReadLine(), out height) || height <= 0;
 
-                if (InvalidNumber)
+                if (invalidNumber)
                 {
                     Console.WriteLine("Некорректный значение. Пожалуйста, введите положительное число.");
                 }
 
-            } while (InvalidNumber);
+            } while (invalidNumber);
 
             Rectangle rectangle = new Rectangle { Width = width, Height = height };
 
-            var StayUntil = false; //не покидать цикл
+            var stayUntil = false; //не покидать цикл
             do
             {
 
@@ -221,29 +227,29 @@ namespace HomeWork1
                 Console.WriteLine("2. Высчитать площадь прямоугольника");
                 Console.WriteLine("3. Вернуться к предыдущим действиям");
 
-                var ChoiceForRectangle = int.Parse(Console.ReadLine());
-
-                switch (ChoiceForRectangle)
+                if (int.TryParse(Console.ReadLine(), out int choice) && Enum.IsDefined(typeof(CaseForRectangle), choice))
                 {
-                    case 1:
+                    CaseForRectangle caseForRectangle = (CaseForRectangle)choice;
+                    switch (caseForRectangle)
+                    {
+                        case CaseForRectangle.perimetr:
+                            double Perimeter = rectangle.Perimeter();
+                            Console.WriteLine($"Периметр прямоугольника: {Perimeter}");
+                            break;
+                        case CaseForRectangle.area:
+                            double Area = rectangle.Area();
+                            Console.WriteLine($"Площадь прямоугольника: {Area}");
+                            break;
+                        case CaseForRectangle.back:
+                            stayUntil = true;  //флаг для выхода 
+                            break;
+                        default:
+                            Console.WriteLine("\n\nНекорректный выбор. Пожалуйста, выберите одну из доступных операций.");
+                            break;
+                    }
 
-                        double Perimeter = rectangle.Perimeter();
-                        Console.WriteLine($"Периметр прямоугольника: {Perimeter}");
-                        break;
-                    case 2:
-                        double Area = rectangle.Area();
-                        Console.WriteLine($"Площадь прямоугольника: {Area}");
-                        break;
-                    case 3:
-                        StayUntil = true;  //флаг для выхода 
-                        break;
-
-                    default:
-                        Console.WriteLine("\n\nНекорректный выбор. Пожалуйста, выберите одну из доступных операций.");
-                        break;
                 }
-
-            } while (!StayUntil);
+            } while (!stayUntil);
         }
     }
 }

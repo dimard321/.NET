@@ -14,22 +14,22 @@
                 return -1;
             }
 
-            var Row = array.GetLength(0);
-            var Column = array.GetLength(1);
-            var Sum = 0.0;
+            var row = array.GetLength(0);
+            var column = array.GetLength(1);
+            var sum = 0.0;
 
-            for (int i = 0; i < Row; i++)  // Проходим по строкам
+            for (int i = 0; i < row; i++)  // Проходим по строкам
             {
-                for (int j = 0; j < Column; j++)  // Проходим по столбцам
+                for (int j = 0; j < column; j++)  // Проходим по столбцам
                 {
                     if (array[i, j] > 0)  // Если текущий элемент положительный
                     {
-                        Sum += array[i, j];  // Добавляем элемент к сумме
+                        sum += array[i, j];  // Добавляем элемент к сумме
                     }
                 }
             }
 
-            return Sum;  // Возвращаем сумму 
+            return sum;  // Возвращаем сумму 
         }
     }
 }
