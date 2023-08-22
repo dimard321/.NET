@@ -1,5 +1,8 @@
-﻿namespace Student
+﻿namespace HomeWork2
 {
+    /// <summary>
+    /// Представляет студента с данными о полном имени и электронной почте.
+    /// </summary>
     public class Student
     {
         /// <summary>
@@ -15,7 +18,7 @@
         /// Конструктор для создания объекта Student по электронной почте.
         /// </summary>
         /// <param name="email">Электронная почта студента.</param>
-        public Student(string email) 
+        public Student(string email)
         {
             Email = email;
             FullName = GetFullNameFromEmail(email); // Получаем полное имя из электронной почты
@@ -39,8 +42,8 @@
         /// <returns>Полное имя студента.</returns>
         private string GetFullNameFromEmail(string email)
         {
-            string[] emailParts = email.Split('@');
-            string[] nameParts = emailParts[0].Split('.');
+            var emailParts = email.Split('@');
+            var nameParts = emailParts[0].Split('.');
             var firstName = char.ToUpper(nameParts[0][0]) + nameParts[0].Substring(1);
             var lastName = char.ToUpper(nameParts[1][0]) + nameParts[1].Substring(1);
             return $"{firstName} {lastName}";
@@ -51,11 +54,11 @@
         /// </summary>
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
-        /// <returns></returns>
+        /// <returns>Строка, представляющая электронную почту в формате "имя.фамилия@mail.ru".</returns>
         private string GetEmailFromFullName(string firstName, string lastName)
         {
-            string lowercaseFirstName = firstName.ToLower(); 
-            string lowercaseLastName = lastName.ToLower(); 
+            var lowercaseFirstName = firstName.ToLower();
+            var lowercaseLastName = lastName.ToLower();
             return $"{lowercaseFirstName}.{lowercaseLastName}@mail.ru";
         }
 
@@ -64,7 +67,7 @@
         /// </summary>
         /// <param name="obj">Объект для сравнения.</param>
         /// <returns>True, если студенты имеют одинаковую электронную почту, иначе False.</returns>
-        public override bool Equals(object obj) 
+        public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType()) // Если null или типы разные
                 return false;
