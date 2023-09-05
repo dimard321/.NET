@@ -1,4 +1,5 @@
 ﻿using HomeWork3;
+using System.Numerics;
 
 /// <summary>
 /// Главный класс программы
@@ -11,29 +12,83 @@ class Program
     /// <param name="args">Аргументы командной строки</param>
     static void Main(string[] args)
     {
-        // Расчет средней длины слова
-        var text = "Это какой то тект, за счет которого, будет высчитываться средняя длина слова";
-        var averageWordLength = AverageLength.CalculateAverageLength(text);
-        Console.WriteLine($"Средняя длина слов: {averageWordLength}");
 
-        // Удвоение символов в строке
-        var originalString = "omg i love shrek";
-        var addeParameters = "o kek";
-        var doubledString = DoubleParams.DoubleParameters(originalString, addeParameters);
-        Console.WriteLine($"\nСоединение параметров: {doubledString}");
+        while (true)
+        {
+            Console.WriteLine("Выберите действие:");
+            Console.WriteLine("1. Расчет средней длины слов");
+            Console.WriteLine("2. Удвоение символов в строке");
+            Console.WriteLine("3. Сложение больших чисел");
+            Console.WriteLine("4. Переворот слов в строке");
+            Console.WriteLine("5. Поиск номера телефона");
+            Console.WriteLine("6. Выход");
 
-        // Сложение больших чисел
-        var number1 = "123456789124658769312345678901234567890";
-        var number2 = "9876987654767827293716768213355778679";
-        var sum = LargeNumber.LargeNumbers(number1, number2);
-        Console.WriteLine($"\nСумма больших чисел: {sum}");
+            int choice;
+            if (!int.TryParse(Console.ReadLine(), out choice))
+            {
+                Console.WriteLine("Пожалуйста, введите числовой выбор.");
+                continue;
+            }
 
-        // Переворот слов в строке
-        var sentence = "Иногда само понятие принципов тебе важнее, чем жизнь по ним.";
-        var reversedWords = Reverse.ReverseWords(sentence);
-        Console.WriteLine($"\nРазворот слов: {reversedWords}");
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine("Введите текст:");
+                    var text = Console.ReadLine();
+                    var averageWordLength = AverageLength.CalculateAverageLength(text);
+                    Console.WriteLine($"Средняя длина слов: {averageWordLength}\n");
+                    break;
+                case 2:
+                    Console.WriteLine("Введите первую строку:");
+                    var firstString = Console.ReadLine();
+                    Console.WriteLine("Введите вторую строку для добавления:");
+                    var addeParameters = Console.ReadLine();
+                    var doubledString = DoubleParams.DoubleParameters(firstString, addeParameters);
+                    Console.WriteLine($"Соединение параметров: {doubledString}\n");
+                    break;
+                case 3:
+                    string number1, number2;
+                    do
+                    {
+                        Console.WriteLine("Введите первое число:");
+                        number1 = Console.ReadLine();
+                        if (!BigInteger.TryParse(number1, out _))
+                        {
+                            Console.WriteLine("Неверное значение. Пожалуйста введите число.");
+                        }
+                    } 
+                    while (!BigInteger.TryParse(number1, out _));
 
-        //Поиск номера телефона
-        FindNumbers.FindAndWritePhoneNumbers();
+                    do
+                    {
+                        Console.WriteLine("Введите второе число:");
+                        number2 = Console.ReadLine();
+                        if (!BigInteger.TryParse(number2, out _))
+                        {
+                            Console.WriteLine("Неверное значение. Пожалуйста введите число.");
+                        }
+                    } 
+                    while (!BigInteger.TryParse(number2, out _));
+
+                    var sum = LargeNumber.LargeNumbers(number1, number2);
+                    Console.WriteLine($"Сумма чисел: {sum}");
+                    break;
+                case 4:
+                    Console.WriteLine("Введите предложение:");
+                    var sentence = Console.ReadLine();
+                    var reversedWords = Reverse.ReverseWords(sentence);
+                    Console.WriteLine($"Разворот слов: {reversedWords} \n");
+                    break;
+                case 5:
+                    FindNumbers.FindPhoneNumbers();
+                    break;
+                case 6:
+                    Console.WriteLine("Выход");
+                    return;
+                default:
+                    Console.WriteLine("Некорректное значение. Пожалуйста выберите действие из списка.");
+                    break;
+            }
+        }
     }
 }
