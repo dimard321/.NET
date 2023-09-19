@@ -1,9 +1,11 @@
-﻿namespace LibraryForFigures
+﻿using LibraryForFigures.Interface;
+
+namespace LibraryForFigures.Figures
 {
     /// <summary>
     /// Класс представляющий прямоугольник
     /// </summary>
-    public class Rectangle : GeometryFigure
+    public class Rectangle : IFigure
     {
         /// <summary>
         /// Длина прямоугольника
@@ -28,7 +30,7 @@
         /// Вычисляет площадь прямоугольника.
         /// </summary>
         /// <returns>Площадь прямоугольника.</returns>
-        public override double CalculateArea()
+        public double CalculateArea()
         {
             return length * width;
         }
@@ -36,7 +38,7 @@
         /// Вычисляет периметр прямоугольника.
         /// </summary>
         /// <returns>Площадь прямоугольника.</returns>
-        public override double CalculatePerimeter()
+        public double CalculatePerimeter()
         {
             return 2 * (length + width);
         }

@@ -1,9 +1,11 @@
-﻿namespace LibraryForGame
+﻿using LibraryForGame.AbstractClasses;
+
+namespace LibraryForGame.GameElements
 {
     /// <summary>
     /// Класс представляющий волка.
     /// </summary>
-    public class Wolf : Monters
+    public class Wolf : Monter
     {
         /// <summary>
         /// Инициализирует новый экземпляр волка с указанными координатами, уровнем атаки и здоровьем.

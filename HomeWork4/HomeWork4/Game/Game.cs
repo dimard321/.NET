@@ -1,6 +1,6 @@
-﻿using LibraryForGame;
-using System.Linq;
-using System.Threading;
+﻿using LibraryForGame.AbstractClasses;
+using LibraryForGame.Enum;
+using LibraryForGame.GameElements;
 
 namespace HomeWork4
 {

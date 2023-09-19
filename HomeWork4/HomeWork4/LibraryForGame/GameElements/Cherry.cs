@@ -1,4 +1,6 @@
-﻿namespace LibraryForGame
+﻿using LibraryForGame.AbstractClasses;
+
+namespace LibraryForGame.GameElements
 {
     /// <summary>
     /// Класс представляющий бонус "Вишня".
