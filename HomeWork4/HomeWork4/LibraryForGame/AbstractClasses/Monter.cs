@@ -7,7 +7,7 @@ namespace LibraryForGame.AbstractClasses
     /// <summary>
     /// Представляет базовый класс для монстров
     /// </summary>
-    public abstract class Monter : IMonster
+    public abstract class Monter : IMonster, IGameElement
     {
         /// <inheritdoc/>
         public int X { get; set; }

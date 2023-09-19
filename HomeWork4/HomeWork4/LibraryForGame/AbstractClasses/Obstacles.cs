@@ -5,7 +5,7 @@ namespace LibraryForGame.AbstractClasses
     /// <summary>
     /// Класс представляющий препятствия
     /// </summary>
-    public abstract class Obstacles : IObstacles
+    public abstract class Obstacles : IGameElement
     {
         /// <inheritdoc/>
         public int X { get; set; }

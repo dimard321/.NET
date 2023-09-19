@@ -5,7 +5,7 @@ namespace LibraryForGame.AbstractClasses
     /// <summary>
     /// Абстрактный класс представляющий бонус.
     /// </summary>
-    public abstract class Bonus : IBonus
+    public abstract class Bonus : IBonus, IGameElement
     {
         /// <inheritdoc/>
         public int X { get; set; }

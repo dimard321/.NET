@@ -1,6 +1,6 @@
 ﻿namespace LibraryForGame.Interfaces
 {
-    public interface IObstacles
+    public interface IGameElement
     {
         /// <summary>
         /// Координата X препятствия.

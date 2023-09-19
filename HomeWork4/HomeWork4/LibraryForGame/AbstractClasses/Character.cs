@@ -5,7 +5,7 @@ namespace LibraryForGame.AbstractClasses
     /// <summary>
     /// Базовый класс персонажей.
     /// </summary>
-    public abstract class Character : ICharacter
+    public abstract class Character : ICharacter, IGameElement
     {
         /// <inheritdoc/>
         public int HP { get; set; }
