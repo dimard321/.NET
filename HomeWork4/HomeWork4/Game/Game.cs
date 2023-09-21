@@ -10,7 +10,7 @@ namespace HomeWork4
     class Program
     {
         /// <summary>
-        /// 
+        /// Основной метод программы придоставляющий выдор
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
