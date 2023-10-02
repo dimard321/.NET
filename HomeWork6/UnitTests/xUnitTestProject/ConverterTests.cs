@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using AutoFixture;
+using Moq;
 using NLog;
 using UnitTests;
 
@@ -15,24 +16,31 @@ namespace xUnitTestProject
         private readonly Mock<ILogger> _logger;
 
         /// <summary>
+        /// Объект Fixture для генерации случайных данных.
+        /// </summary>
+        private readonly Fixture _fixture;
+
+        /// <summary>
         /// Инициализирует экземпляр класса ConverterTests с заданным логгером
         /// </summary>
         /// <param name="logger">Логгер для записи событий и ошибок</param>
         public ConverterTests()
         {
             _logger = new Mock<ILogger>();
+            _fixture = new Fixture();
         }
 
-        [Theory]
-        [InlineData("2345435432342342342", 2345435432342342342)]
-        [InlineData("-4563243423423457675", -4563243423423457675)]
-        [InlineData("0", 0)]
-        public void Convert_ShouldConvertStringToInt(string inputString, int expectedResult)
+        [Fact]
+        public void Convert_ShouldConvertStringToInt()
         {
+            //Arrange
+            var inputString = _fixture.Create<int>().ToString();
+            var expectedResult = int.Parse(inputString);
+            var converter = new Converter(_logger.Object);
 
-            var Converter = new Converter(_logger.Object);
             // Act
-            var result = Converter.Convert(inputString);
+            var result = converter.Convert(inputString);
+
             // Assert
             Assert.Equal(expectedResult, result);
         }
@@ -47,6 +55,7 @@ namespace xUnitTestProject
         {
             // Arrange
             var converter = new Converter(_logger.Object);
+
             // Act & Assert
             Assert.Throws<FormatException>(() => converter.Convert(inputString));
         }
@@ -56,6 +65,7 @@ namespace xUnitTestProject
         {
             //Arrange
             var converter = new Converter(_logger.Object);
+
             //Act&Assert
             Assert.Throws<ArgumentNullException>(() => converter.Convert(null));
         }

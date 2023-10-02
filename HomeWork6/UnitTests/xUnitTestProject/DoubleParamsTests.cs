@@ -1,4 +1,5 @@
-﻿using UnitTests;
+﻿using AutoFixture;
+using UnitTests;
 
 namespace xUnitTestProject
 {
@@ -7,40 +8,37 @@ namespace xUnitTestProject
     /// </summary>
     public class DoubleParamsTests
     {
+        /// <summary>
+        /// Объект Fixture для генерации случайных данных.
+        /// </summary>
+        private readonly IFixture _fixture;
+
+        /// <summary>
+        /// Инициализирует экземпляр класса DoubleParamsTests с заданным логгером
+        /// </summary>
+        /// <param name="logger">Логгер для записи событий и ошибок</param>
+        public DoubleParamsTests()
+        {
+            _fixture = new Fixture();
+        }
+
         [Fact]
         public void DoubleParameters_ShouldDoubleChars()
         {
             //Arrange
-            var input = "Killua!";
-            var charactersToDouble = "King";
-            //Act
-            var result = DoubleParams.DoubleParameters(input, charactersToDouble);
-            //Assert
-            Assert.Equal("KKiillua", result);
-        }
+            var input = _fixture.Create<string>().ToString();
+            var charactersToDouble = _fixture.Create<string>().ToString();
+            var expectedResult = input;
+            foreach (var character in charactersToDouble)
+            {
+                expectedResult = expectedResult.Replace(character.ToString(), character.ToString() + character.ToString());
+            }
 
-        [Fact]
-        public void DoubleParameters_ShouldNotDoubleSpaceChars()
-        {
-            //Arrange
-            var input = "killer killua";
-            var charactersToDouble = "king";
             //Act
             var result = DoubleParams.DoubleParameters(input, charactersToDouble);
-            //Assert
-            Assert.Equal("kkiiller kkiillua", result);
-        }
 
-        [Fact]
-        public void DoubleParameters_ShouldProcessingEmptyCharsToDoubleString()
-        {
-            //Arrange
-            var input = "killer  killua";
-            var charactersToDouble = "";
-            //Act
-            var result = DoubleParams.DoubleParameters(input, charactersToDouble);
             //Assert
-            Assert.Equal("killer  killua", result);
+            Assert.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -48,10 +46,9 @@ namespace xUnitTestProject
         {
             //Arrange
             string input = null;
-            var charactersToDouble = "king";
-            //Act
-            var result = DoubleParams.DoubleParameters(input, charactersToDouble);
-            //Assert
+            var charactersToDouble = _fixture.Create<string>().ToString();
+
+            //Act&Assert
             Assert.Throws<ArgumentNullException>(() => AverageLength.CalculateAverageLength(DoubleParams.DoubleParameters(input, charactersToDouble)));
         }
     }

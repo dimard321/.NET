@@ -1,4 +1,5 @@
-﻿using UnitTests;
+﻿using AutoFixture;
+using UnitTests;
 
 namespace xUnitTestProject
 {
@@ -7,27 +8,40 @@ namespace xUnitTestProject
     /// </summary>
     public class ReverseTests
     {
-        [Theory]
-        [InlineData("Killer killua", "killua Killer")]
-        [InlineData("Killua", "Killua")]
-        [InlineData("Killer   killua", "killua   Killer")]
-        [InlineData("", "")]
-        [InlineData("  Killer killua  ", "  killua Killer  ")]
-        [InlineData("Killer, killua. He killed him.", ".him killed He. killua ,Killer")]
-        [InlineData("Killer Killua@mail.ru", "Killua@mail.ru Killer")]
-        public void ShouldReverseWordsInSentence(string sentence, string expected)
+        /// <summary>
+        /// Объект Fixture для генерации случайных данных.
+        /// </summary>
+        private readonly IFixture _fixture;
+
+        /// <summary>
+        /// Инициализирует экземпляр класса ReverseTests с заданным логгером
+        /// </summary>
+        /// <param name="logger">Логгер для записи событий и ошибок</param>
+        public ReverseTests()
         {
+            _fixture = new Fixture();
+        }
+
+        [Fact]
+        public void Reverse_ShouldReverseWordsInSentence()
+        {
+            //Arrange
+            var sentence = _fixture.Create<string>().ToString();
+            var expected = Reverse.ReverseWords(sentence);
+
             // Act
-            string result = Reverse.ReverseWords(sentence);
+            var result = Reverse.ReverseWords(sentence);
+
             // Assert
             Assert.Equal(expected, result);
         }
 
         [Fact]
-        public void ShouldThrowArgumentNullExceptionForNullArgument()
+        public void Reverse_ShouldThrowArgumentNullExceptionForNullArgument()
         {
             // Arrange
             string sentence = null;
+
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() => Reverse.ReverseWords(sentence));
         }

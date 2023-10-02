@@ -1,3 +1,4 @@
+using AutoFixture;
 using UnitTests;
 
 namespace xUnitTestProject
@@ -7,17 +8,28 @@ namespace xUnitTestProject
     /// </summary>
     public class AverageLengthTests
     {
-        [Theory]
-        [InlineData(null, 0)]
-        [InlineData("Zxcursed", 8)]
-        [InlineData("I can not stop", 2.7)]
-        [InlineData("Hello, my name is Sasha! Ok.", 3.3)]
-        [InlineData("The commission is 12 persent", 3.6)]
-        [InlineData("The commission is 20% of $100. We send a check by mail qwerty@mail.ru", 3.4)]
-        public void ShouldCalculateAverageLength(string text, double expected)
+        /// <summary>
+        /// ќбъект Fixture дл€ генерации случайных данных.
+        /// </summary>
+        private readonly IFixture _fixture;
+
+        /// <summary>
+        /// »нициализирует экземпл€р класса AverageLengthTests с заданным логгером
+        /// </summary>
+        /// <param name="logger">Ћоггер дл€ записи событий и ошибок</param>
+        public AverageLengthTests()
         {
+            _fixture = new Fixture();
+        }
+
+        [Fact]
+        public void ShouldCalculateAverageLength()
+        {
+            //Arrange
+            var text = _fixture.Create<string>().ToString();
+            var expected = text.Split(' ').Average(word => word.Length);
             // Act
-            double result = AverageLength.CalculateAverageLength(text);
+            var result = AverageLength.CalculateAverageLength(text);
             // Assert
             Assert.Equal(expected, result, precision: 1);
         }

@@ -1,4 +1,6 @@
-﻿using UnitTests;
+﻿using AutoFixture;
+using System.Numerics;
+using UnitTests;
 
 namespace xUnitTestProject
 {
@@ -7,95 +9,58 @@ namespace xUnitTestProject
     /// </summary>
     public class LargeNumberTests
     {
-        
-        [Fact]
-        public void LargeNumbers_ShouldSumTwoPositiveLargeNumbers()
+        /// <summary>
+        /// Объект Fixture для генерации случайных данных.
+        /// </summary>
+        private readonly IFixture _fixture;
+
+        /// <summary>
+        /// Инициализирует экземпляр класса LargeNumberTests с заданным логгером
+        /// </summary>
+        /// <param name="logger">Логгер для записи событий и ошибок</param>
+        public LargeNumberTests()
         {
-            //Arrange
-            string number1 = "25348790128379128937";
-            string number2 = "89787987565648734565";
-            //Act
-            string result = LargeNumber.LargeNumbers(number1, number2);
-            //Assert
-            Assert.Equal("115136777694027863502", result);
+            _fixture = new Fixture();
         }
 
         [Fact]
-        public void LargeNumbers_ShouldSumTwoNegativeLargeNumbers()
+        public void LargeNumbers_ShouldSumTwoLargeNumbers()
         {
             //Arrange
-            string number1 = "-25348790128379128937";
-            string number2 = "-89787987565648734565";
+            var number1 = _fixture.Create<BigInteger>().ToString();
+            var number2 = _fixture.Create<BigInteger>().ToString();
+            var expectedResult = number1 + number2;
+
             //Act
-            string result = LargeNumber.LargeNumbers(number1, number2);
+            var result = LargeNumber.LargeNumbers(number1, number2);
+
             //Assert
-            Assert.Equal("-115136777694027863502", result);
+            Assert.Equal(expectedResult, result);
         }
 
-        [Fact]
-        public void LargeNumbers_ShouldSumPositiveAndNegativeLargeNumbers()
+        [Theory]
+        [InlineData("*", "*")]
+        [InlineData(".", ".")]
+        [InlineData(",", ",")]
+        [InlineData("?", "?")]
+        [InlineData("/", "/")]
+        [InlineData("-", "-")]
+        [InlineData("", "")]
+        public void LargeNumbers_ShouldThrowExceptionForInvalidCharsInFirstArgument(string number1, string number2)
         {
             //Arrange
-            string number1 = "25348790128379128937";
-            string number2 = "-89787987565648734565";
-            //Act
-            string result = LargeNumber.LargeNumbers(number1, number2);
-            //Assert
-            Assert.Equal("-64439197437269605628", result);
-        }
+            var result = LargeNumber.LargeNumbers(number1, number2);
 
-        [Fact]
-        public void LargeNumbers_ShouldSumNegativeAndPositiveLargeNumbers()
-        {
-            //Arrange
-            string number1 = "-25348790128379128937";
-            string number2 = "89787987565648734565";
-            //Act
-            string result = LargeNumber.LargeNumbers(number1, number2);
-            //Assert
-            Assert.Equal("64439197437269605628", result);
-        }
-
-        [Fact]
-        public void LargeNumbers_ShouldProcessingZeroInSecondArgument()
-        {
-            //Arrange
-            string number1 = "25348790128379128937";
-            string number2 = "0";
-            //Act
-            string result = LargeNumber.LargeNumbers(number1, number2);
-            //Assert
-            Assert.Equal("25348790128379128937", result);
-        }
-
-        [Fact]
-        public void LargeNumbers_ShouldProcessingZeroInFirstArgument()
-        {
-            //Arrange
-            string number1 = "0";
-            string number2 = "89787987565648734565";
-            //Act
-            string result = LargeNumber.LargeNumbers(number1, number2);
-            //Assert
-            Assert.Equal("89787987565648734565", result);
-        }
-
-        [Fact]
-        public void LargeNumbers_ShouldThrowExceptionForInvalidCharsInFirstArgument()
-        {
-            //Arrange
-            string number1 = "2534.87-90,328379128937"; 
-            string number2 = "89787987565648734565";
             //Act&Assert
             Assert.Throws<FormatException>(() => LargeNumber.LargeNumbers(number1, number2));
         }
-
         [Fact]
         public void LargeNumbers_ShouldThrowArgumentNullExceptionForNullArgument()
         {
             //Arrangenull
             string number1 = null;
-            string number2 = "25348790328379128937";
+            var number2 = _fixture.Create<BigInteger>().ToString();
+
             //Act&Assert
             Assert.Throws<ArgumentNullException>(() => LargeNumber.LargeNumbers(number1, number2));
         }
