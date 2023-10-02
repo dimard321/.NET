@@ -1,25 +1,21 @@
-﻿namespace LibraryForGame
+﻿using LibraryForGame.Enum;
+using LibraryForGame.GameElements;
+using LibraryForGame.Interfaces;
+
+namespace LibraryForGame.AbstractClasses
 {
     /// <summary>
     /// Представляет базовый класс для монстров
     /// </summary>
-    public class Monters
+    public abstract class Monter : IMonster, IGameElement
     {
-        /// <summary>
-        /// Координата X препятствия
-        /// </summary>
+        /// <inheritdoc/>
         public int X { get; set; }
-        /// <summary>
-        /// Координата Y препятствия.
-        /// </summary>
+        /// <inheritdoc/>
         public int Y { get; set; }
-        /// <summary>
-        /// Сила атаки Монстра
-        /// </summary>
+        /// <inheritdoc/>
         public int Attack { get; set; }
-        /// <summary>
-        /// HP монстра
-        /// </summary>
+        /// <inheritdoc/>
         public int HP { get; set; }
 
         /// <summary>
@@ -29,7 +25,7 @@
         /// <param name="y">Координата Y монстра.</param>
         /// <param name="attack">Сила атаки монстра.</param>
         /// <param name="hp">Здоровье монстра.</param>
-        public Monters(int x, int y, int attack, int hp)
+        public Monter(int x, int y, int attack, int hp)
         {
             X = x;
             Y = y;

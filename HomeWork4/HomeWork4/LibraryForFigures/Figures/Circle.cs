@@ -1,9 +1,11 @@
-﻿namespace LibraryForFigures
+﻿using LibraryForFigures.Interface;
+
+namespace LibraryForFigures.Figures
 {
     /// <summary>
     /// Класс представляющий окружность
     /// </summary>
-    public class Circle : GeometryFigure
+    public class Circle : IFigure
     {
         /// <summary>
         /// Радиус круга.
@@ -16,14 +18,14 @@
         /// <param name="radius">Радиус окружности.</param>
         public Circle(double radius)
         {
-            this.Radius = radius;
+            Radius = radius;
         }
 
         /// <summary>
         /// Вычисляет площадь окружности.
         /// </summary>
         /// <returns>Площадь окружности.</returns>
-        public override double CalculateArea()
+        public double CalculateArea()
         {
             return Math.PI * Radius * Radius;
         }
@@ -32,7 +34,7 @@
         /// Вычисляет периметр окружности.
         /// </summary>
         /// <returns>Периметр окружности.</returns>
-        public override double CalculatePerimeter()
+        public double CalculatePerimeter()
         {
             return 2 * Math.PI * Radius;
         }

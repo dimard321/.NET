@@ -1,9 +1,11 @@
-﻿namespace LibraryForFigures
+﻿using LibraryForFigures.Interface;
+
+namespace LibraryForFigures.Figures
 {
     /// <summary>
     /// Класс представляющий треугольник
     /// </summary>
-    public class Triangle : GeometryFigure
+    public class Triangle : IFigure
     {
         /// <summary>
         /// Первая сторона треугольника
@@ -35,7 +37,7 @@
         /// Вычисляет площадь треугольника
         /// </summary>
         /// <returns>Значение площади треугольника.</returns>
-        public override double CalculateArea()
+        public double CalculateArea()
         {
             double s = (sideA + sideB + sideC) / 2;
             return Math.Sqrt(s * (s - sideA) * (s - sideB) * (s - sideC));
@@ -45,7 +47,7 @@
         /// Вычисляет периметр треугольника.
         /// </summary>
         /// <returns>Значение периметра треугольника.</returns>
-        public override double CalculatePerimeter()
+        public double CalculatePerimeter()
         {
             return sideA + sideB + sideC;
         }

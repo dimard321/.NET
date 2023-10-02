@@ -1,21 +1,17 @@
-﻿namespace LibraryForGame
+﻿using LibraryForGame.Interfaces;
+
+namespace LibraryForGame.AbstractClasses
 {
     /// <summary>
     /// Абстрактный класс представляющий бонус.
     /// </summary>
-    public abstract class Bonus
+    public abstract class Bonus : IBonus, IGameElement
     {
-        /// <summary>
-        /// Координата X препятствия.
-        /// </summary>
+        /// <inheritdoc/>
         public int X { get; set; }
-        /// <summary>
-        /// Координата Y препятствия.
-        /// </summary>
+        /// <inheritdoc/>
         public int Y { get; set; }
-        /// <summary>
-        /// Значение бонуса
-        /// </summary>
+        /// <inheritdoc/>
         public int BonusValue { get; set; }
 
         /// <summary>

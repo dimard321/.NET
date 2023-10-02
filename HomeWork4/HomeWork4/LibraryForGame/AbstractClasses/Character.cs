@@ -1,30 +1,22 @@
-﻿namespace LibraryForGame
+﻿using LibraryForGame.Interfaces;
+
+namespace LibraryForGame.AbstractClasses
 {
     /// <summary>
     /// Базовый класс персонажей.
     /// </summary>
-    public class Character
+    public abstract class Character : ICharacter, IGameElement
     {
-        /// <summary>
-        /// Здоровье персонажа.
-        /// </summary>
+        /// <inheritdoc/>
         public int HP { get; set; }
-        /// <summary>
-        /// Скорость перемещения персонажа.
-        /// </summary>
+        /// <inheritdoc/>
         public int Speed { get; set; }
-        /// <summary>
-        /// Сила атаки персонажа.
-        /// </summary>
+        /// <inheritdoc/>
         public int Attack { get; set; }
-        /// <summary>
-        /// Координата X препятствия.
-        /// </summary>
+        /// <inheritdoc/>
         public int X { get; set; }
-        /// <summary>
-        /// Координата Y препятствия.
-        /// </summary>
-        public int Y { get; set; } = 0;
+        /// <inheritdoc/>
+        public int Y { get; set; }
 
         /// <summary>
         /// Инициализирует новый экземпляр персонажа с указанными параметрами.

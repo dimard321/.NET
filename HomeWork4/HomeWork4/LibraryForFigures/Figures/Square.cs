@@ -1,9 +1,11 @@
-﻿namespace LibraryForFigures
+﻿using LibraryForFigures.Interface;
+
+namespace LibraryForFigures.Figures
 {
     /// <summary>
     /// Класс представляющий квадрат
     /// </summary>
-    public class Square : GeometryFigure
+    public class Square : IFigure
     {
         /// <summary>
         /// Сторона квадрата
@@ -23,7 +25,7 @@
         /// Вычисляет площадь квадрата.
         /// </summary>
         /// <returns>Значение площади квадрата.</returns>
-        public override double CalculateArea()
+        public double CalculateArea()
         {
             return side * side;
         }
@@ -32,7 +34,7 @@
         /// Вычисляет периметр квадрата.
         /// </summary>
         /// <returns>Значение периметра квадрата.</returns>
-        public override double CalculatePerimeter()
+        public double CalculatePerimeter()
         {
             return 4 * side;
         }

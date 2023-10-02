@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace LibraryForFigures
+namespace LibraryForFigures.Enum
 {
     /// <summary>
     /// Перечисление действий связанных с фигурами.

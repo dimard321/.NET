@@ -1,4 +1,5 @@
-﻿using LibraryForFigures;
+﻿using LibraryForFigures.Enum;
+using LibraryForFigures.Figures;
 
 namespace Figures
 {

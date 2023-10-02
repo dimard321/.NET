@@ -1,9 +1,11 @@
-﻿namespace LibraryForGame
+﻿using LibraryForGame.AbstractClasses;
+
+namespace LibraryForGame.GameElements
 {
     /// <summary>
     /// Класс представляющий медведя.
     /// </summary>
-    public class Bear : Monters
+    public class Bear : Monter
     {
         /// <summary>
         /// Инициализирует новый экземпляр медведя с указанными координатами, уровнем атаки и здоровьем.
