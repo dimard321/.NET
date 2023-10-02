@@ -10,7 +10,7 @@ namespace HomeWork4
     class Program
     {
         /// <summary>
-        /// Главный мктод программы предоставляющий выбор и отображающий все действия
+        /// Основной метод программы предоставляющий выбор
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
